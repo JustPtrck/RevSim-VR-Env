@@ -1,7 +1,11 @@
 # RevSim-VR-Env
- Enviroment with Unity enviroment
+Enviroment with Unity enviroment 
 
+Unity 2022.3.10f1
 
+## YawVR - Yaw2 
+The Unity SDK found on yawvr.com uses a very outdated version of Unity (2017).
+The code used here is very likely to be modified before use.
 
 ## OpenXR
 This project uses OpenXR to implement VR.
