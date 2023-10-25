@@ -10,6 +10,8 @@ The code used here is very likely to be modified before use.
 
 ### SDK Issues
 - Extreme frame rate dips
+- Unsupported OpenXR version in demo
+- Shaders not URP supported
 
 
 
