@@ -6,7 +6,8 @@ public class WaterManager : MonoBehaviour
 
     [SerializeField] private Material material;
     [SerializeField] private int planeSize = 10;
-    [SerializeField] private float UVScale = 2f;
+    [SerializeField] private int xTilesAmount = 1;
+    private float UVScale;
     [SerializeField, Range(1, 10), Tooltip("Keep as low as possible!\nWill reduce performance GREATLY")] 
     private int meshResolution = 1;
     private Mesh mesh;
@@ -18,7 +19,8 @@ public class WaterManager : MonoBehaviour
     private void Awake() {
         meshFilter = gameObject.GetComponent<MeshFilter>() ? gameObject.GetComponent<MeshFilter>() : gameObject.AddComponent<MeshFilter>();
         meshRenderer = gameObject.GetComponent<MeshRenderer>() ? gameObject.GetComponent<MeshRenderer>() : gameObject.AddComponent<MeshRenderer>();
-        
+        if (xTilesAmount < 1) xTilesAmount = 1;
+        UVScale = planeSize / xTilesAmount;
         mesh = PlaneMeshGenerator.CreateMesh(planeSize, meshResolution, UVScale);
         meshFilter.mesh = mesh;
         meshRenderer.material = material;

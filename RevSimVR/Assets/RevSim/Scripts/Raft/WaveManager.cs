@@ -30,21 +30,20 @@ public class WaveManager : MonoBehaviour
 
     public Vector3 GetWaveDisplacement(Vector3 position, ref Vector3 normal)
     {
-        // NORMALS RETURNED ARE INCORRECT
-        Vector3 tangent = new Vector3();
-        Vector3 binormal = new Vector3();
+        Vector3 tangent = new Vector3(1,0,0);
+        Vector3 binormal = new Vector3(0,0,1);
         Vector3 p = new Vector3(position.x, YOffset, position.z);
         switch(waveType){
             case WaveType.Gerstner:
             foreach (Wave wave in waves)
                 p += GerstnerWave(wave, p, ref tangent, ref binormal);
-            normal = Vector3.Cross(binormal, tangent);
+            normal = Vector3.Cross(binormal, tangent).normalized;
             break;
 
             case WaveType.Sine:
             foreach (Wave wave in waves)
                 p += SineWave(wave, p, ref tangent, ref binormal);
-            normal = binormal;
+            normal = Vector3.Cross(binormal, tangent).normalized;
             break;
         }
         return p;
@@ -65,7 +64,7 @@ public class WaveManager : MonoBehaviour
         Vector2 direction = new Vector2(Mathf.Cos(wave.direction * Mathf.PI / 180), Mathf.Sin(wave.direction * Mathf.PI / 180));
         float steepness = wave.steepness;
         float wavelength = wave.wavelength;
-        if (wave.wavelength == 0) wavelength = 1;
+        if (wave.wavelength == 0) wavelength = 1f;
         float speed = wave.speed;
 
         float k = 2 * Mathf.PI / wavelength;
@@ -74,8 +73,8 @@ public class WaveManager : MonoBehaviour
         float f = k * (Vector2.Dot(d, new Vector2(position.x, position.z)) - c * Time.time);
         float a = steepness / k;
 
-        tangent = new Vector3(1, d.x * steepness * Mathf.Cos(f), 0).normalized;
-        normal += new Vector3(-tangent.y, tangent.x, 0);
+        tangent += new Vector3(0, d.x * (steepness * Mathf.Cos(f)),0);
+        normal += new Vector3(0, d.y * (steepness * Mathf.Cos(f)), 0);
         
         return new Vector3(0, a * Mathf.Sin(f), 0);
     }
@@ -87,11 +86,10 @@ public class WaveManager : MonoBehaviour
         // Y: amplitude * sin(2 * pi / wavelenght * dot(direction, position.XZ) - sqrt(9.8 / (2 * pi / wavelenght)) * speed * t)
         // Z: direction.z * amplitude * cos(2 * pi / wavelenght * dot(direction, position.XZ) - sqrt(9.8 / (2 * pi / wavelenght)) * speed * t)
 
-        // THIS FUNCTION IS BROKEN --> XZ is not moving in a waveform 
         Vector2 direction = new Vector2(Mathf.Cos(wave.direction * Mathf.PI / 180), Mathf.Sin(wave.direction * Mathf.PI / 180));
         float steepness = wave.steepness;
         float wavelength = wave.wavelength;
-        if (wave.wavelength == 0) wavelength = 1;
+        if (wave.wavelength == 0) wavelength = 1f;
         float speed = wave.speed;
 
         float k = 2 * Mathf.PI / wavelength;
@@ -119,6 +117,9 @@ public class WaveManager : MonoBehaviour
 
 
     private void UpdateWaterShader(){
+        // This Method updates the variables in the GetWaveDisplacement.hlsl Sub-Shader
+        // Communicates the variables from CPU to GPU
+
         List<Vector4> temp = new List<Vector4>();
         foreach (Wave wave in waves){
             temp.Add(new Vector4(wave.direction, wave.steepness, wave.wavelength, wave.speed));
@@ -131,9 +132,11 @@ public class WaveManager : MonoBehaviour
         waveMaterial.SetFloat("_SyncedTime", Time.time);
     }
 
+
+
     [Serializable]
     public struct Wave{
-        [Range(0, 360), Tooltip("Sets the direction of the wave with XZ vector in degrees")]
+        [Range(0, 360), Tooltip("Sets the direction of the wave with XZ vector in degrees\n 0 degrees: x=1, z=0")]
         public float direction;
         [Range(0,1), Tooltip("Determines the steepness and height of the waves\nSum of wave.steepness should be lower than 1.0")] 
         public float steepness;

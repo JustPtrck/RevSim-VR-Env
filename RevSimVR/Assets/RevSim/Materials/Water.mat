@@ -99,6 +99,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _AlphaTest: 0
     - _AlphaToMask: 0
     - _Amount: 1
     - _Amount_1: -0.32
@@ -109,6 +110,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _ColorFade: 2
     - _ColorOffset: 0.33
+    - _ColorTransition: 0.61
     - _Cull: 2
     - _Cutoff: 1.37
     - _DetailAlbedoMapScale: 1
@@ -116,6 +118,8 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _FadeDepth: 1.29
+    - _Float: 0.46
     - _FoamAmount: 0.6
     - _FoamCutoff: -1.83
     - _FoamOn: 1
@@ -127,29 +131,38 @@ Material:
     - _GlossyReflections: 0
     - _IntersectDepth: 0.3
     - _Metallic: 0
-    - _NormalSpeed: 0.2
-    - _NormalStrength: 0.1
+    - _NormalScale: 2
+    - _NormalSpeed: 0.5
+    - _NormalStrength: 0.02
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RefScale: 0
+    - _RefSpeed: 1
+    - _RefStrength: 4.4
+    - _Scale: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _TileScale: 100
+    - _WaterDensity: 1
+    - _WaterDepth: 2
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0, g: 0.8792577, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDark: {r: 0, g: 0.43708533, b: 0.8962264, a: 0}
-    - _ColorLight: {r: 0, g: 2, b: 1.2839813, a: 0}
+    - _ColorDark: {r: 0, g: 0.43708533, b: 0.8962264, a: 1}
+    - _ColorLight: {r: 0, g: 2, b: 1.2839813, a: 1}
+    - _DepthColor: {r: 0, g: 0.15605257, b: 0.3962264, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FresnelColor: {r: 1.1018867, g: 2, b: 1.2224191, a: 0}
+    - _FresnelColor: {r: 1.1018867, g: 2, b: 1.2224191, a: 1}
     - _NormalTiling: {r: 2, g: 2, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
