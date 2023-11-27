@@ -1,0 +1,13 @@
+{
+    "name" : "patrickverwimp.shaderstudy",
+    "version": "1.0.1",
+    "description": "A collection of shaders created by Patrick Verwimp to improve programming and designing skills.",
+    "displayName": "Shader Study - Patrick Verwimp",
+    "unity": "2022.3",
+    "unityRelease": "10f1",
+    "author": {
+        "name": "Patrick Verwimp",
+        "email": "patrickverwimp@gmail.com",
+        "url": "https://github.com/JustPtrck"
+    }
+}

@@ -1,0 +1,23 @@
+#pragma kernel CSMain
+#define PI 3.14159265358979323846
+#include "GetWaveDisplacement.hlsl"
+
+
+struct DN
+{
+    float3 vertex_in;
+    float3 displacement;
+    float3 normal;
+};
+
+RWStructuredBuffer<DN> dnBuffer;
+float time_in;
+
+[numthreads(1, 1, 1)]
+void CSMain(uint3 id: SV_DispatchThreadID)
+{
+    DN dn = dnBuffer[id.x];
+    float offset;
+    GetWaveDisplacement_float(dn.vertex_in, time_in, dn.displacement, dn.normal, offset);
+    dnBuffer[id.x] = dn;
+}

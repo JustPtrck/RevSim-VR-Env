@@ -297,6 +297,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "patrickverwimp.shaderstudy": {
+      "version": "file:C:/Users/Gebruiker/Desktop/ShadersStudy/Shaders/Assets/ShadersStudy/UnityShaders",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
