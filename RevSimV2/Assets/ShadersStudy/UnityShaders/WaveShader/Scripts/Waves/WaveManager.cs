@@ -3,24 +3,27 @@ using System;
 using UnityEngine;
 
 namespace JustPtrck.Shaders.Water{
+        
     /// <summary>
     /// A single instance Class (per Scene) which manages waves across the Scene. <para/>
     /// LIST WaveManager <br/>
-    /// [x] Make sure CPU and GPU get the exact same displacement
+    /// [x] Move all calculations to GPU
     /// [ ] Make sure Wavelenght cannot be 0
     /// [ ] Make sure um of Steepness cannot be higher than 1.0
+    /// [ ] Use buffers to communicate waves
     /// </summary>
     public class WaveManager : MonoBehaviour
     {
-        public enum WaveType{Sine, Gerstner}
         public static WaveManager instance;
 
         [SerializeField, Tooltip("Sets water height in meters (Units)")] 
         private float YOffset = 0f;    
-        [SerializeField] private Material waveMaterial;
-        [SerializeField] private List<Wave> waves = new List<Wave>();
+        [SerializeField, Range(0f, 1f)] private float steepnessMod = 1f;
+        [SerializeField] private WaveObject waveObject = null;
+        //[SerializeField] private List<Wave> waves = new List<Wave>();
         [SerializeField] private List<ImpactWave> impactWaves = new List<ImpactWave>();
 
+        [SerializeField] private Material waveMaterial;
         [SerializeField] private ComputeShader computeShader;
         
         private void Awake(){
@@ -34,43 +37,6 @@ namespace JustPtrck.Shaders.Water{
 
         private void FixedUpdate(){
             UpdateGPUValues(waveMaterial);
-        }
-
-        /// <summary>
-        /// This Method calculates the position displacement of the input Position and updates the Normal at this position.
-        /// This Method makes a sum of the Waves in the Waves List and ImpactWaves List at the input Position. <br />
-        /// Including a max of 10 SineWaves, 10 GerstnerWaves and 10 ImpactWaves. 
-        /// </summary>
-        /// <param name="position">Position on which the wave displacement should be calculated.</param>
-        /// <param name="normal">Normal Vector that should be updated. To the displacement normal at "position"</param>
-        /// <returns>A Vector3 (Position) containing a sum of all wave displacements and the input position. Which indicates the height of the wave at the Input position.</returns>
-        public Vector3 GetWaveDisplacement(Vector3 position, ref Vector3 normal)
-        {
-            Vector3 tangent = new Vector3(1,0,0);
-            Vector3 binormal = new Vector3(0,0,1);
-            Vector3 p = new Vector3(position.x, YOffset, position.z);
-            foreach(Wave wave in waves)
-                switch(wave.waveType){
-                    case WaveType.Gerstner:
-                        p += GerstnerWave(wave, p, ref tangent, ref binormal);
-                    break;
-
-                    case WaveType.Sine:
-                        p += SineWave(wave, p, ref tangent, ref binormal);
-                    break;
-                }
-            foreach (ImpactWave wave in impactWaves)
-            {
-                p += ImpactRippleWave(wave, p, ref tangent, ref binormal);
-            }
-            normal = Vector3.Cross(binormal, tangent).normalized;
-            return p;
-        }
-
-        public Vector3 GetWaveDisplacement(Vector3 position)
-        {
-            Vector3 normal = new Vector3();
-            return GetWaveDisplacement(position, ref normal);
         }
 
         public Vector3 GetDisplacementFromGPU(Vector3 position)
@@ -108,104 +74,6 @@ namespace JustPtrck.Shaders.Water{
             return displacement;
         }
 
-        private Vector3 SineWave(Wave wave, Vector3 position, ref Vector3 tangent, ref Vector3 normal){
-            // Calculates the displacement of a point based on a Sinewave with the input values of Wave
-            // Returns Displacement Vector3:
-            // X: 0 
-            // Y: amplitude * sin(2 * pi / wavelenght * dot(direction, position.XZ) - speed * t)
-            // Z: 0
-            Vector2 direction = new Vector2(Mathf.Cos(wave.direction * Mathf.PI / 180), Mathf.Sin(wave.direction * Mathf.PI / 180));
-            float steepness = wave.steepness;
-            float wavelength = wave.wavelength;
-            if (wave.wavelength == 0) wavelength = 1f;
-            float speed = wave.speed;
-
-            float k = 2 * Mathf.PI / wavelength;
-            Vector2 d = direction.normalized;
-            float c = Mathf.Sqrt(9.8f / k) * speed;
-            float f = k * (Vector2.Dot(d, new Vector2(position.x, position.z)) - c * Time.time);
-            float a = steepness / k;
-
-            tangent += new Vector3(0, d.x * (steepness * Mathf.Cos(f)),0);
-            normal += new Vector3(0, d.y * (steepness * Mathf.Cos(f)), 0);
-            
-            return new Vector3(0, a * Mathf.Sin(f), 0);
-        }
-
-        private Vector3 GerstnerWave(Wave wave, Vector3 position, ref Vector3 tangent, ref Vector3 binormal){
-            // Calculates the displacement of a point based on a Gerstnerwave with the input values of Wave
-            // Returns Displacement Vector3:
-            // X: direction.x * amplitude * cos(2 * pi / wavelenght * dot(direction, position.XZ) - sqrt(9.8 / (2 * pi / wavelenght)) * speed * t)
-            // Y: amplitude * sin(2 * pi / wavelenght * dot(direction, position.XZ) - sqrt(9.8 / (2 * pi / wavelenght)) * speed * t)
-            // Z: direction.z * amplitude * cos(2 * pi / wavelenght * dot(direction, position.XZ) - sqrt(9.8 / (2 * pi / wavelenght)) * speed * t)
-
-            Vector2 direction = new Vector2(Mathf.Cos(wave.direction * Mathf.PI / 180), Mathf.Sin(wave.direction * Mathf.PI / 180));
-            float steepness = wave.steepness;
-            float wavelength = wave.wavelength;
-            if (wave.wavelength == 0) wavelength = 1f;
-            float speed = wave.speed;
-
-            float k = 2 * Mathf.PI / wavelength;
-            float c = Mathf.Sqrt(9.8f / k) * speed;
-            Vector2 d = direction.normalized;
-            float f = k * (Vector2.Dot(d, new Vector2(position.x, position.z)) - c * Time.time);
-            float a = steepness / k;
-            
-            tangent += new Vector3(
-                -d.x * d.x * (steepness * Mathf.Sin(f)),
-                d.x * (steepness * Mathf.Cos(f)),
-                -d.x * d.y * (steepness * Mathf.Sin(f))
-            );
-            binormal += new Vector3(
-                -d.x * d.y * (steepness *  Mathf.Sin(f)),
-                d.y * (steepness *  Mathf.Cos(f)),
-                -d.y * d.y * (steepness *  Mathf.Sin(f))
-            );
-            return new Vector3(
-                d.x * (a * Mathf.Cos(f)),
-                a * Mathf.Sin(f),
-                d.y * (a * Mathf.Cos(f))
-            );
-        }
-
-
-        private Vector3 ImpactRippleWave(ImpactWave wave, Vector3 position, ref Vector3 tangent, ref Vector3 binormal) {
-            float elapsed_time = Time.time - wave.timestamp;
-            float steepness = wave.steepness * (wave.duration - (Time.time - wave.timestamp))/wave.duration;
-            float wavelength = wave.wavelength;
-            float delay = 3/wavelength;
-            float k = 2 * Mathf.PI / (wavelength);
-            float a = steepness / k ;
-            Vector2 d = (new Vector2(position.x, position.y) - wave.origin).normalized;
-            float c = Mathf.Sqrt(9.8f / k);
-            
-            float dist = Vector2.Distance(wave.origin, new Vector2(position.x, position.y));
-            float maxDist = a * wavelength;
-            float decay = (maxDist - dist) / maxDist;
-
-            float f = k * (dist - elapsed_time * c) ;
-
-            if (dist < maxDist * ( elapsed_time / (delay + elapsed_time) ) ){
-                tangent += new Vector3(
-                    -d.x * d.x * (steepness * decay * Mathf.Sin(f)),
-                    d.x * (steepness * decay * Mathf.Cos(f)),
-                    -d.x * d.y * (steepness * decay * Mathf.Sin(f))
-                );
-                binormal += new Vector3(
-                    -d.x * d.y * (steepness * decay * Mathf.Sin(f)),
-                    d.y * (steepness * decay * Mathf.Cos(f)),
-                    -d.y * d.y * (steepness * decay * Mathf.Sin(f))
-                ); 
-                return new Vector3(
-                    d.x * a * decay * Mathf.Cos(f), 
-                    a * decay * Mathf.Sin(f), 
-                    d.y * a * decay * Mathf.Cos(f)
-                );
-            }
-            return Vector3.zero;
-        }
-
-
         private void UpdateGPUValues(ComputeShader GPULocation){
             // This Method updates the variables in the GetWaveDisplacement.hlsl Sub-Shader
             // Communicates the variables from CPU to GPU
@@ -219,13 +87,13 @@ namespace JustPtrck.Shaders.Water{
             int sine_idx = 0;
             int impact_idx = 0;
 
-            foreach (Wave wave in waves){
+            foreach (Wave wave in waveObject.Waves){
                 if (wave.waveType == WaveType.Gerstner) {
-                    gerstner[gerstner_idx] = new Vector4(wave.direction, wave.steepness, wave.wavelength, wave.speed);
+                    gerstner[gerstner_idx] = new Vector4(wave.direction, wave.steepness * steepnessMod, wave.wavelength, wave.speed);
                     gerstner_idx++;
                 }
                 else if (wave.waveType == WaveType.Sine) {
-                    sine[sine_idx] = new Vector4(wave.direction, wave.steepness, wave.wavelength, wave.speed);
+                    sine[sine_idx] = new Vector4(wave.direction, wave.steepness * steepnessMod, wave.wavelength, wave.speed);
                     sine_idx++;
                 }
             }
@@ -233,7 +101,7 @@ namespace JustPtrck.Shaders.Water{
             foreach (ImpactWave wave in impactWaves){
                 if (Time.time - wave.timestamp > wave.duration) impactWaves.Remove(wave);
                 else{
-                    impact[impact_idx] = new Vector4(wave.origin.x, wave.origin.y, wave.steepness * (wave.duration - (Time.time - wave.timestamp))/wave.duration, wave.wavelength);
+                    impact[impact_idx] = new Vector4(wave.origin.x, wave.origin.y, wave.steepness * steepnessMod * (wave.duration - (Time.time - wave.timestamp))/wave.duration, wave.wavelength);
                     impactTimes[impact_idx] = wave.timestamp;   
                     impact_idx++;
                 }
@@ -271,13 +139,13 @@ namespace JustPtrck.Shaders.Water{
             int sine_idx = 0;
             int impact_idx = 0;
 
-            foreach (Wave wave in waves){
+            foreach (Wave wave in waveObject.Waves){
                 if (wave.waveType == WaveType.Gerstner) {
-                    gerstner[gerstner_idx] = new Vector4(wave.direction, wave.steepness, wave.wavelength, wave.speed);
+                    gerstner[gerstner_idx] = new Vector4(wave.direction, wave.steepness * steepnessMod, wave.wavelength, wave.speed);
                     gerstner_idx++;
                 }
                 else if (wave.waveType == WaveType.Sine) {
-                    sine[sine_idx] = new Vector4(wave.direction, wave.steepness, wave.wavelength, wave.speed);
+                    sine[sine_idx] = new Vector4(wave.direction, wave.steepness * steepnessMod, wave.wavelength, wave.speed);
                     sine_idx++;
                 }
             }
@@ -285,7 +153,7 @@ namespace JustPtrck.Shaders.Water{
             foreach (ImpactWave wave in impactWaves){
                 if (Time.time - wave.timestamp > wave.duration) impactWaves.Remove(wave);
                 else{
-                    impact[impact_idx] = new Vector4(wave.origin.x, wave.origin.y, wave.steepness * (wave.duration - (Time.time - wave.timestamp))/wave.duration, wave.wavelength);
+                    impact[impact_idx] = new Vector4(wave.origin.x, wave.origin.y, wave.steepness * steepnessMod * (wave.duration - (Time.time - wave.timestamp))/wave.duration, wave.wavelength);
                     impactTimes[impact_idx] = wave.timestamp;   
                     impact_idx++;
                 }
@@ -332,19 +200,19 @@ namespace JustPtrck.Shaders.Water{
 
 
 
-        [Serializable]
-        public struct Wave{
-            public WaveType waveType;
-            [Range(0, 360), Tooltip("Sets the direction of the wave with XZ vector in degrees\n 0 degrees: x=1, z=0")]
-            public float direction;
-            [Range(0,1), Tooltip("Determines the steepness and height of the waves\nSum of wave.steepness should be lower than 1.0")] 
-            public float steepness;
-            [Range(1,100), Tooltip("Sets the wavelenght of each wave")] 
-            public float wavelength;
-            [Range(0,10), Tooltip("Speed modifier of the wave offset")] 
-            // IDEA: Change speed to offset
-            public float speed;
-        };
+        // [Serializable]
+        // public struct Wave{
+        //     public WaveType waveType;
+        //     [Range(0, 360), Tooltip("Sets the direction of the wave with XZ vector in degrees\n 0 degrees: x=1, z=0")]
+        //     public float direction;
+        //     [Range(0,1), Tooltip("Determines the steepness and height of the waves\nSum of wave.steepness should be lower than 1.0")] 
+        //     public float steepness;
+        //     [Range(1,100), Tooltip("Sets the wavelenght of each wave")] 
+        //     public float wavelength;
+        //     [Range(0,10), Tooltip("Speed modifier of the wave offset")] 
+        //     // IDEA: Change speed to offset
+        //     public float speed;
+        // };
 
         public struct DN{
             public Vector3 vertex_in;

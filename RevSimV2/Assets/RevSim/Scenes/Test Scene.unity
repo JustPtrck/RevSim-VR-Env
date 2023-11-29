@@ -492,7 +492,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4637228224705303614, guid: b2db00cc4030f47faad8506c631645eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201449707206359007, guid: b2db00cc4030f47faad8506c631645eb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804032174265894556, guid: b2db00cc4030f47faad8506c631645eb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8804032174265894556, guid: b2db00cc4030f47faad8506c631645eb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -834,6 +850,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1323075572, guid: 2bc661d94c1e14567afb101148bd8a54, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.3999023
+      objectReference: {fileID: 0}
     - target: {fileID: 1270163095460072, guid: 2bc661d94c1e14567afb101148bd8a54, type: 3}
       propertyPath: m_Name
       value: YawUI
@@ -947,6 +967,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 646890205804465879, guid: 2bc661d94c1e14567afb101148bd8a54,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644029343262535468, guid: 2bc661d94c1e14567afb101148bd8a54,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.3999023
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
