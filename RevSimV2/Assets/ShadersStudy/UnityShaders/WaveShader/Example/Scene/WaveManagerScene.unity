@@ -422,7 +422,7 @@ MonoBehaviour:
   - {fileID: 460086938}
   - {fileID: 689465525}
   - {fileID: 1525865727}
-  floaterType: 1
+  floaterType: 0
   depthBeforeSubmerged: 1
   displacementAmount: 3
   waterDrag: 0.99
@@ -854,53 +854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   YOffset: 0
   steepnessMod: 1
-  waveObject: {fileID: 0}
-  waves:
-  - waveType: 0
-    direction: 44
-    steepness: 0.4
-    wavelength: 50
-    speed: 1
-  - waveType: 0
-    direction: 83
-    steepness: 0.11
-    wavelength: 10
-    speed: 1
-  - waveType: 0
-    direction: 17
-    steepness: 0.13
-    wavelength: 46
-    speed: 1
-  - waveType: 0
-    direction: 236
-    steepness: 0.12
-    wavelength: 20
-    speed: 1
-  - waveType: 0
-    direction: 216
-    steepness: 0.07
-    wavelength: 10
-    speed: 1
-  - waveType: 0
-    direction: 83
-    steepness: 0.07
-    wavelength: 10
-    speed: 1
-  - waveType: 0
-    direction: 116
-    steepness: 0.14
-    wavelength: 6
-    speed: 1
-  - waveType: 0
-    direction: 282
-    steepness: 0.25
-    wavelength: 37
-    speed: 1
-  - waveType: 0
-    direction: 44
-    steepness: 0.1
-    wavelength: 32
-    speed: 1
+  waveObject: {fileID: 11400000, guid: 573b073f7fdad744a9b1f818e5b3fdce, type: 2}
   waveMaterial: {fileID: 2100000, guid: 7ad93305cd6dd764d819917243fd8a33, type: 2}
   computeShader: {fileID: 7200000, guid: 2f712c5a5c4870f47a7191c7a3594aa2, type: 3}
 --- !u!4 &556303405

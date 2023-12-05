@@ -5,7 +5,7 @@ using UnityEngine;
 namespace JustPtrck.Shaders.Water{
     public class Floater : MonoBehaviour
     {
-        private enum FloaterType{Physics, Ideal};
+        public enum FloaterType{Physics, Ideal};
 
         // Private variables
         private Rigidbody rb;
@@ -22,6 +22,7 @@ namespace JustPtrck.Shaders.Water{
         [SerializeField] private float displacementAmount = 3f;
         [SerializeField] private float waterDrag = 0.99f;
         [SerializeField] private float waterAngularDrag = 0.5f;
+        [SerializeField] private Transform modelTransform;
         
         [Header("Ideal Settings")]
         [SerializeField] private Vector3 anchorPoint = Vector3.zero;
@@ -34,6 +35,8 @@ namespace JustPtrck.Shaders.Water{
         private Vector3 meanVector;
         private Vector3 meanNormal;
         private List<Vector3> points;
+
+        public FloaterType state{get{return floaterType;}}
 
         private void Start() {
             if (floaters.Count <= 0) floaters.Add(transform);        
@@ -92,12 +95,15 @@ namespace JustPtrck.Shaders.Water{
         private void SimulatePhysics(){
             foreach (Transform floater in floaters)
             {
-                Vector3 floaterPos = anchorPoint + Vector3.Scale(transform.localScale, floater.localPosition);
-                Vector3 displacement = WaveManager.instance.GetDisplacementFromGPU(floaterPos);
-                if (floaterPos.y < displacement.y)
+                Vector3 floaterPos = modelTransform.position + Vector3.Scale(modelTransform.localScale, floater.localPosition);
+                Vector3 displacement = WaveManager.instance.GetDisplacementFromGPU(floaterPos) - new Vector3(modelTransform.position.x, 0, modelTransform.position.z);
+                if (floater.position.y < displacement.y)
                 {
-                    float displacementMultiplier = Mathf.Clamp01((displacement.y - floaterPos.y) / depthBeforeSubmerged) * displacementAmount;
-                    rb.AddForceAtPosition(new Vector3(-displacement.x, Mathf.Abs(Physics.gravity.y), -displacement.z) * displacementMultiplier, floaterPos,ForceMode.Acceleration);
+                    float displacementMultiplier = Mathf.Clamp01((displacement.y - floater.position.y) / depthBeforeSubmerged) * displacementAmount;
+                    Vector3 buoyancyForce = new Vector3(0, Mathf.Abs(Physics.gravity.y) / floaters.Count, 0) * displacementMultiplier;
+                    rb.AddForceAtPosition(buoyancyForce, floater.position, ForceMode.Acceleration);
+                    Debug.DrawLine(floater.position + buoyancyForce, floater.position, Color.red);
+                    // rb.AddForceAtPosition(new Vector3(-displacement.x, Mathf.Abs(Physics.gravity.y), -displacement.z) * displacementMultiplier, floaterPos, ForceMode.Acceleration);
                     rb.AddForce(displacementMultiplier * -rb.velocity * waterDrag * Time.fixedDeltaTime, ForceMode.VelocityChange);
                     rb.AddTorque(displacementMultiplier * -rb.angularVelocity * waterAngularDrag * Time.fixedDeltaTime, ForceMode.VelocityChange);
                 }

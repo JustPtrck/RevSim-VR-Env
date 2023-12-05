@@ -104,7 +104,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _ColorFade: 44.76
     - _ColorOffset: 0.84
-    - _ColorTransition: 0
+    - _ColorTransition: 0.5
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -112,7 +112,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FoamAmount: 1
+    - _FoamAmount: 3.17
     - _FoamSize: 1
     - _FoamSpeed: 0
     - _FresnelStrenght: 0.04
@@ -135,7 +135,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _WaterDepth: 1
+    - _WaterDepth: 10
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -143,7 +143,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorDark: {r: 0.01196154, g: 0.1710648, b: 0.5283019, a: 0}
     - _ColorLight: {r: 0.58973455, g: 6.650202, b: 3.301899, a: 0}
-    - _DepthColor: {r: 0, g: 0.12887576, b: 0.35849056, a: 1}
+    - _DepthColor: {r: 0.4469562, g: 0.6591074, b: 0.8490566, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 0}

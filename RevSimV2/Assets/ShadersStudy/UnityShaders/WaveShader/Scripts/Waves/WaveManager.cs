@@ -20,7 +20,6 @@ namespace JustPtrck.Shaders.Water{
         private float YOffset = 0f;    
         [SerializeField, Range(0f, 1f)] private float steepnessMod = 1f;
         [SerializeField] private WaveObject waveObject = null;
-        //[SerializeField] private List<Wave> waves = new List<Wave>();
         [SerializeField] private List<ImpactWave> impactWaves = new List<ImpactWave>();
 
         [SerializeField] private Material waveMaterial;
@@ -197,22 +196,6 @@ namespace JustPtrck.Shaders.Water{
             newWave.timestamp = Time.time;
             impactWaves.Add(newWave);
         }
-
-
-
-        // [Serializable]
-        // public struct Wave{
-        //     public WaveType waveType;
-        //     [Range(0, 360), Tooltip("Sets the direction of the wave with XZ vector in degrees\n 0 degrees: x=1, z=0")]
-        //     public float direction;
-        //     [Range(0,1), Tooltip("Determines the steepness and height of the waves\nSum of wave.steepness should be lower than 1.0")] 
-        //     public float steepness;
-        //     [Range(1,100), Tooltip("Sets the wavelenght of each wave")] 
-        //     public float wavelength;
-        //     [Range(0,10), Tooltip("Speed modifier of the wave offset")] 
-        //     // IDEA: Change speed to offset
-        //     public float speed;
-        // };
 
         public struct DN{
             public Vector3 vertex_in;
