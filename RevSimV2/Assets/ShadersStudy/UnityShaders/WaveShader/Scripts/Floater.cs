@@ -17,15 +17,24 @@ namespace JustPtrck.Shaders.Water{
         [SerializeField, Tooltip("Choose floating type\n1. Physics: Transform based on simulated Physics\n2. Ideal: Transform based on Geometry")] 
         private FloaterType floaterType = FloaterType.Ideal;
 
+        public FloaterType floatType{get{return floaterType;}}
+        [System.Serializable]
+        public struct Anchor {
+            public Vector3 position;
+            public float rotationAngle;
+        };
+
         [Header("Physics Settings")]
         [SerializeField] private float depthBeforeSubmerged = 1f;
         [SerializeField] private float displacementAmount = 3f;
+        [SerializeField] private float boyancyMod = 2f;
         [SerializeField] private float waterDrag = 0.99f;
         [SerializeField] private float waterAngularDrag = 0.5f;
         [SerializeField] private Transform modelTransform;
         
         [Header("Ideal Settings")]
-        [SerializeField] private Vector3 anchorPoint = Vector3.zero;
+        [SerializeField] private Anchor anchor = new Anchor();
+        public Anchor anchorPoint {get{ return anchor;} set{anchor = value;}}
         [Header("Debugging")]
         [SerializeField, Tooltip("Toggles Draw Gizmos for the floaters")] private bool showFloaters;
         [SerializeField, Tooltip("Toggles Draw Gizmos for the meanVector")] private bool showMeanVector;
@@ -35,8 +44,6 @@ namespace JustPtrck.Shaders.Water{
         private Vector3 meanVector;
         private Vector3 meanNormal;
         private List<Vector3> points;
-
-        public FloaterType state{get{return floaterType;}}
 
         private void Start() {
             if (floaters.Count <= 0) floaters.Add(transform);        
@@ -72,7 +79,7 @@ namespace JustPtrck.Shaders.Water{
             foreach (Transform floater in floaters)
             {
                 Vector3 normal = new Vector3();
-                Vector3 floaterPos = anchorPoint + Vector3.Scale(transform.localScale, floater.localPosition);
+                Vector3 floaterPos = anchor.position + Vector3.Scale(transform.localScale, floater.localPosition);
                 Vector3 point = WaveManager.instance.GetDisplacementFromGPU(floaterPos, ref normal) ;
                 points.Add(point);
                 sumVector += point;
@@ -83,6 +90,8 @@ namespace JustPtrck.Shaders.Water{
             meanNormal = sumNormals / floaters.Count;
             transform.position = meanVector;
             transform.up = meanNormal;
+            Vector3 temp = transform.position + new Vector3(Mathf.Sin(anchor.rotationAngle), 0f, Mathf.Cos(anchor.rotationAngle)).normalized;
+            transform.Rotate(transform.up, anchor.rotationAngle, Space.World);
             if (showNormals) Debug.DrawRay(transform.position, meanNormal, Color.red);
         }
 
@@ -90,22 +99,31 @@ namespace JustPtrck.Shaders.Water{
         /// This method uses a Rigidbody for the floating Physics. 
         /// It calls on the WaveManager instance to get the wave height and apply boyancy force on those positions, opposing the gravitational forces.<para/>
         /// FIX Update Method so the GameObject has proper gravity physics <br/>
-        /// IDEA Comlete revision
+        /// FIX Only uses height which is ONLY SINE WAVES
         /// </summary>
         private void SimulatePhysics(){
             foreach (Transform floater in floaters)
             {
-                Vector3 floaterPos = modelTransform.position + Vector3.Scale(modelTransform.localScale, floater.localPosition);
-                Vector3 displacement = WaveManager.instance.GetDisplacementFromGPU(floaterPos) - new Vector3(modelTransform.position.x, 0, modelTransform.position.z);
+                Vector3 floaterPos = floater.position;
+                Vector3 displacement = WaveManager.instance.GetDisplacementFromGPU(floaterPos) - new Vector3(floater.position.x, 0, floater.position.z);
+
+                float temp = Mathf.Clamp(displacement.y - floater.position.y, 0f, 5f) * boyancyMod;
+                // ERROR FIX THIS SHIT AAAAHHHH
                 if (floater.position.y < displacement.y)
                 {
-                    float displacementMultiplier = Mathf.Clamp01((displacement.y - floater.position.y) / depthBeforeSubmerged) * displacementAmount;
-                    Vector3 buoyancyForce = new Vector3(0, Mathf.Abs(Physics.gravity.y) / floaters.Count, 0) * displacementMultiplier;
-                    rb.AddForceAtPosition(buoyancyForce, floater.position, ForceMode.Acceleration);
-                    Debug.DrawLine(floater.position + buoyancyForce, floater.position, Color.red);
+                    // NEW
+                    float buoyancyForce = Mathf.Abs(Physics.gravity.y) * ((displacement.y - floater.position.y) * boyancyMod + 1);
+                    Vector3 buoyancyVector = new Vector3(0, buoyancyForce, 0) / floaters.Count;
+                    rb.AddForceAtPosition(buoyancyVector, floater.position, ForceMode.Acceleration);
+
+
+                    float displacementMultiplier = (Mathf.Clamp01(displacement.y - floater.position.y) / depthBeforeSubmerged) * displacementAmount;
+                    // Vector3 buoyancyVector = new Vector3(displacement.x / 2, Mathf.Abs(Physics.gravity.y) * temp, displacement.z / 2) / floaters.Count * displacementMultiplier;
+                    // rb.AddForceAtPosition(buoyancyVector, floater.position, ForceMode.Force);
+                    Debug.DrawLine(floater.position + buoyancyVector, floater.position, Color.red);
                     // rb.AddForceAtPosition(new Vector3(-displacement.x, Mathf.Abs(Physics.gravity.y), -displacement.z) * displacementMultiplier, floaterPos, ForceMode.Acceleration);
-                    rb.AddForce(displacementMultiplier * -rb.velocity * waterDrag * Time.fixedDeltaTime, ForceMode.VelocityChange);
-                    rb.AddTorque(displacementMultiplier * -rb.angularVelocity * waterAngularDrag * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                    rb.AddForce(displacementMultiplier * -rb.velocity * waterDrag * Time.fixedDeltaTime / floaters.Count, ForceMode.VelocityChange);
+                    rb.AddTorque(displacementMultiplier * -rb.angularVelocity * waterAngularDrag * Time.fixedDeltaTime / floaters.Count, ForceMode.VelocityChange);
                 }
             }
         }

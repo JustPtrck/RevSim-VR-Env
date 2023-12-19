@@ -1,6 +1,6 @@
 {
     "name" : "patrickverwimp.shaderstudy",
-    "version": "1.0.1",
+    "version": "1.0.8",
     "description": "A collection of shaders created by Patrick Verwimp to improve programming and designing skills.",
     "displayName": "Shader Study - Patrick Verwimp",
     "unity": "2022.3",

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -816,12 +816,32 @@ PrefabInstance:
       propertyPath: rudder
       value: 
       objectReference: {fileID: 617534386}
+    - target: {fileID: 9088167066924514393, guid: 43accddd7660922499a39aaa528650fd,
+        type: 3}
+      propertyPath: waterDrag
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088167066924514393, guid: 43accddd7660922499a39aaa528650fd,
+        type: 3}
+      propertyPath: floaterType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088167066924514393, guid: 43accddd7660922499a39aaa528650fd,
+        type: 3}
+      propertyPath: waterAngularDrag
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8223935396077988357, guid: 43accddd7660922499a39aaa528650fd, type: 3}
     - {fileID: 5542237171194684720, guid: 43accddd7660922499a39aaa528650fd, type: 3}
+    - {fileID: 6104197674220969691, guid: 43accddd7660922499a39aaa528650fd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1062054682442417791, guid: 43accddd7660922499a39aaa528650fd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 836077477}
   m_SourcePrefab: {fileID: 100100000, guid: 43accddd7660922499a39aaa528650fd, type: 3}
 --- !u!1 &832575517
 GameObject:
@@ -872,6 +892,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &836077471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1062054682442417791, guid: 43accddd7660922499a39aaa528650fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 763156776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &836077477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836077471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e042438a3033a743a065afe2accf660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceleration: 3
+  rudderMaxAngle: 40
+  rotationSpeed: 2
+  rudder: {fileID: 617534386}
+  motor: {fileID: 1021405269}
+  floater: {fileID: 0}
 --- !u!1 &857494034
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,10 +1028,13 @@ MonoBehaviour:
   floaterType: 0
   depthBeforeSubmerged: 1
   displacementAmount: 3
+  boyancyMod: 2
   waterDrag: 0.2
   waterAngularDrag: 0.5
   modelTransform: {fileID: 941912724}
-  anchorPoint: {x: 0, y: 0, z: 0}
+  anchor:
+    position: {x: 0, y: 0, z: 0}
+    rotationAngle: 0
   showFloaters: 0
   showMeanVector: 0
   showNormals: 0
@@ -1108,14 +1155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5faed47034fd8aa4bb379154022fa575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 1
-  maxVelocity: 5
-  rb: {fileID: 941912728}
-  rudder: {fileID: 266508329}
-  motor: {fileID: 0}
-  rudderMaxAngle: 40
-  rudderArea: 2
-  rudderDragC: 1.05
 --- !u!114 &941912727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,6 +1213,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &1021405269 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4349251059068911815, guid: 43accddd7660922499a39aaa528650fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 763156776}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1214112637
 GameObject:
   m_ObjectHideFlags: 0
