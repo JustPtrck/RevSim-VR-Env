@@ -6,10 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/RevSim/Scenes/Test Scene.unity
+    path: Assets/RevSim/RaftSim/Scenes/RaftSim.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
+    Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 5462bf3e148eb7b4bac81cf7a70718a2,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: c43cb50f54920e242ab668e61de4df98,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 86c5853fcb91a8a4e851dc290f93f33f,
       type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 663c21d74f4b7fb48845a3a1c55843dc,
       type: 2}

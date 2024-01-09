@@ -19,11 +19,12 @@ namespace JustPtrck.Shaders.Water{
         [SerializeField, Tooltip("Sets water height in meters (Units)")] 
         private float YOffset = 0f;    
         [SerializeField, Range(0f, 1f)] private float steepnessMod = 1f;
+        [SerializeField] private WaveObject safe; 
         [SerializeField] private WaveObject waveObject = null;
         [SerializeField] private List<ImpactWave> impactWaves = new List<ImpactWave>();
-
         [SerializeField] private Material waveMaterial;
         [SerializeField] private ComputeShader computeShader;
+
         
         private void Awake(){
             if (instance == null) instance = this;
@@ -35,6 +36,8 @@ namespace JustPtrck.Shaders.Water{
         }
 
         private void FixedUpdate(){
+            if (waveObject == null)
+                waveObject = safe;
             UpdateGPUValues(waveMaterial);
         }
 
@@ -177,6 +180,34 @@ namespace JustPtrck.Shaders.Water{
             GPULocation.SetFloat("_YOffset", YOffset);
             GPULocation.SetFloat("_SyncedTime", Time.time);
         }
+
+        public bool ChangeWaveObject(WaveObject _wave, float transitionTime, float maxSteepness)
+        {
+            float steepnessSpeed = 2/transitionTime;
+            if (_wave == null)
+                _wave = safe;
+
+            if (steepnessMod < 0 && waveObject != _wave)
+                steepnessMod = 0;
+            else if (steepnessMod > 0 && waveObject != _wave)
+                steepnessMod -= steepnessSpeed * Time.deltaTime;
+            else if (steepnessMod == 0 && waveObject != _wave)
+                waveObject = _wave;
+            else if (steepnessMod > maxSteepness + .01f && waveObject == _wave)
+                steepnessMod -= steepnessSpeed * Time.deltaTime;
+            else if (steepnessMod < maxSteepness - .01f && waveObject == _wave)
+                steepnessMod += steepnessSpeed * Time.deltaTime;
+            else if (steepnessMod > maxSteepness && waveObject == _wave)
+                steepnessMod = maxSteepness;
+            else if (steepnessMod >= 0 && waveObject == _wave)
+                steepnessMod += steepnessSpeed * Time.deltaTime;
+
+            if (steepnessMod == maxSteepness && waveObject == _wave)
+                return true;
+            else 
+                return false;
+        }
+
 
 
         /// <summary>

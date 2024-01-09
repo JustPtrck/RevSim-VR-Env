@@ -6,6 +6,7 @@ public class MoveWithOrigin : MonoBehaviour
 {
     [SerializeField] private Transform origin;
     [SerializeField] private bool x, y, z;
+    [SerializeField] private bool yaw, pitchRoll;
 
 
     // Update is called once per frame
@@ -25,5 +26,12 @@ public class MoveWithOrigin : MonoBehaviour
             transform.position = new Vector3(transform.position.x, origin.position.y, transform.position.z);
         else if (!x && !y && z)
             transform.position = new Vector3(transform.position.x, transform.position.y, origin.position.z);
+
+        // TODO Add rest
+        if (yaw && pitchRoll)
+            transform.rotation = origin.rotation;
+        else if (yaw && !pitchRoll)
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, origin.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
     }
 }

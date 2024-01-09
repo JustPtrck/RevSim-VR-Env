@@ -38,7 +38,7 @@ namespace JustPtrck.Water.Interactables{
             float curVelo = new Vector2(rb.velocity.x, rb.velocity.z).magnitude;
             // if (rudder.position.y < WaveManager.instance.GetDisplacementFromGPU(rudder.position).y)
             //     rb.AddForceAtPosition(rudder.right * curVelo * Mathf.Sin(Mathf.Deg2Rad * rudderAngle), rudder.position, ForceMode.Force);
-            Debug.Log($"Velocity: {curVelo}");
+            // Debug.Log($"Velocity: {curVelo}");
 
 
             // TEMP Formula for force
@@ -52,13 +52,13 @@ namespace JustPtrck.Water.Interactables{
         {
             float mod = value.Get<float>();
             motorForce = acceleration * mod * Mathf.Cos(Mathf.Deg2Rad * rudderAngle);
-            Debug.Log($"Accelerate Input: {mod}");
+            // Debug.Log($"Accelerate Input: {mod}");
             return;
         }
         public void OnSteering(InputValue value)
         {
             rudderAngle = rudderMaxAngle * value.Get<float>();
-            Debug.Log($"Steering Input: {value.Get<float>()}");
+            // Debug.Log($"Steering Input: {value.Get<float>()}");
             rudder.transform.localRotation = Quaternion.Euler(0f, rudderAngle, 0f);
             return;
         }

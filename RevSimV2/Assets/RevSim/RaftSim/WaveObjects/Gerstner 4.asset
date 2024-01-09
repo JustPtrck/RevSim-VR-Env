@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbbdfdd0c199f045a7fc3abb90b5e75, type: 3}
+  m_Name: Gerstner 4
+  m_EditorClassIdentifier: 
+  waves:
+  - waveType: 1
+    direction: 0
+    steepness: 0.1
+    wavelength: 10
+    speed: 1
+  - waveType: 1
+    direction: 210
+    steepness: 0.3
+    wavelength: 20
+    speed: 1
+  - waveType: 1
+    direction: 271
+    steepness: 0.2
+    wavelength: 30
+    speed: 1
+  - waveType: 1
+    direction: 331
+    steepness: 0.2
+    wavelength: 35
+    speed: 1
+  - waveType: 1
+    direction: 234
+    steepness: 0.2
+    wavelength: 60
+    speed: 1
