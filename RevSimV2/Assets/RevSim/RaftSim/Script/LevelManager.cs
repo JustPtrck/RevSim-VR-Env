@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using JustPtrck.Shaders.Water;
 using UnityEngine.UI;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -12,25 +13,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float lastMod = 1f;
     [SerializeField, Range(.1f, 1f)] private float steepnessMod = 1f;
     [SerializeField, Range(1f, 20f)] private float transitionTime = 2f; 
-    [SerializeField] private Slider UITimeSlider, UILevelSlider, UIModSlider;
-    [SerializeField] private Text UITimeText, UILevelText, UIModText;
-
+    public Tuple<float, int, float> values {get{return new Tuple<float, int, float> (transitionTime, newLevel, steepnessMod);}}
     // Update is called once per frame
     private void Update()
     {
         ChangeWave();
-        UpdateUI(); 
-    }
-
-    private void UpdateUI()
-    {
-        UITimeText.text = transitionTime.ToString();
-        UITimeSlider.value = transitionTime;
-        UILevelText.text = newLevel.ToString();
-        UILevelSlider.value = newLevel;
-        UILevelSlider.maxValue = levels.Count - 1;
-        UIModText.text = steepnessMod.ToString();
-        UIModSlider.value = steepnessMod;
     }
 
     private void ChangeWave()
