@@ -6,7 +6,7 @@ using YawVR;
 /// <summary>
 /// Sets the YawTracker's orientation based on the GameObject's orientation
 /// </summary>
-public class SimpleOrientationCopy : MonoBehaviour
+public class SimpleOrientation : MonoBehaviour
 {
     /*
        This script simply copies this gameObject's rotation, and sends it to the YawTracker
