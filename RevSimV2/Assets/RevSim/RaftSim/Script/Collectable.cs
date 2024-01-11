@@ -5,7 +5,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Filtering;
 
 [RequireComponent(typeof(XRSimpleInteractable))]
-public class Collectable : MonoBehaviour, IUseable
+[RequireComponent(typeof(XRPokeFilter))]
+public class CoinScript : MonoBehaviour, IUseable
 {
     public int score = 1;
 
