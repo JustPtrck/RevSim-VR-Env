@@ -199,9 +199,15 @@ MonoBehaviour:
   m_AllowGazeAssistance: 0
   m_FirstHoverEntered:
     m_PersistentCalls:
+      m_Calls: []
+  m_LastHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverEntered:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6227883188463396590}
-        m_TargetAssemblyTypeName: CoinScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: Collectable, Assembly-CSharp
         m_MethodName: Interact
         m_Mode: 1
         m_Arguments:
@@ -212,12 +218,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_LastHoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_HoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
   m_HoverExited:
     m_PersistentCalls:
       m_Calls: []
