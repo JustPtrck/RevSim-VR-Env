@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollectableSpawn : MonoBehaviour
 {
-    [SerializeField, Range(0.5f, 2f)] private float spawnRadius = 1.2f;
+    [SerializeField, Range(0.5f, 5f)] private float spawnRadius = 1.2f;
     [SerializeField, Range(0f, 360f)] private float horizontalRange = 180f;
     [SerializeField, Range(0f, 180f)] private float verticalRange = 90f;
     [SerializeField, Range(0f, 180f)] private float verticalOffset = 30f;
