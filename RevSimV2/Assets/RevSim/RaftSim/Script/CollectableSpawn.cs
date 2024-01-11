@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class CollectableSpawn : MonoBehaviour
 {
-    [SerializeField, Range(0.5f, 5f)] private float spawnRadius = 1.2f;
+    [SerializeField, Range(0.5f, 4f)] private float spawnRadius = 1.2f;
     [SerializeField, Range(0f, 360f)] private float horizontalRange = 180f;
     [SerializeField, Range(0f, 180f)] private float verticalRange = 90f;
-    [SerializeField, Range(0f, 180f)] private float verticalOffset = 30f;
+    [SerializeField, Range(-180f, 180f)] private float verticalOffset = 30f;
     [SerializeField] private GameObject prefab;
 
     private GameObject currentTarget = null;
+
+    public float radius{get{return spawnRadius;} set{if (value >= 0.5 && value <= 4) spawnRadius = value;}}
+    public float horizontal{get{return horizontalRange;} set{if (value >= 0 && value <= 360) horizontalRange = value;}}
+    public float vertical{get{return verticalRange;} set{if (value >= 0 && value <= 180) verticalRange = value;}}
+    public float offset{get{return verticalOffset;} set{if (value >= -180 && value <= 180) verticalOffset = value;}}
 
     void Update()
     {
@@ -22,7 +27,7 @@ public class CollectableSpawn : MonoBehaviour
         // Gets a random X Y Z for the given range 
         float z = Mathf.Cos(Mathf.Deg2Rad * (Random.Range(- horizontalRange, horizontalRange) / 2));
         float x = Mathf.Sin(Mathf.Deg2Rad * (Random.Range(- horizontalRange, horizontalRange) / 2));
-        float y = Mathf.Sin(Mathf.Deg2Rad * (Random.Range(- verticalRange, verticalRange) / 2 + verticalOffset));
+        float y = Mathf.Sin(Mathf.Deg2Rad * (Random.Range(0, verticalRange) + verticalOffset));
         
         // Normalizes a vector based on the XYZ so the length is always 1 and multiplies it by the radius
         Vector3 spawnPosition = new Vector3(x, y, z).normalized * spawnRadius;
@@ -43,8 +48,8 @@ public class CollectableSpawn : MonoBehaviour
         Gizmos.DrawRay(transform.position, new Vector3(Mathf.Sin(Mathf.Deg2Rad * horizontalRange / 2), 0, Mathf.Cos(Mathf.Deg2Rad * horizontalRange / 2) ) * spawnRadius);
         Gizmos.DrawRay(transform.position, new Vector3(Mathf.Sin(Mathf.Deg2Rad * - horizontalRange / 2), 0, Mathf.Cos(Mathf.Deg2Rad * - horizontalRange / 2) ) * spawnRadius);
         
-        Gizmos.DrawRay(transform.position, new Vector3(0, Mathf.Sin(Mathf.Deg2Rad * (verticalRange / 2 + verticalOffset)), Mathf.Cos(Mathf.Deg2Rad * (verticalRange / 2 + verticalOffset)) ) * spawnRadius);
-        Gizmos.DrawRay(transform.position, new Vector3(0, Mathf.Sin(Mathf.Deg2Rad * (- verticalRange / 2 + verticalOffset)), Mathf.Cos(Mathf.Deg2Rad *  (- verticalRange / 2 + verticalOffset)) ) * spawnRadius);
+        Gizmos.DrawRay(transform.position, new Vector3(0, Mathf.Sin(Mathf.Deg2Rad * (verticalRange + verticalOffset)), Mathf.Cos(Mathf.Deg2Rad * (verticalRange  + verticalOffset)) ) * spawnRadius);
+        Gizmos.DrawRay(transform.position, new Vector3(0, Mathf.Sin(Mathf.Deg2Rad * verticalOffset), Mathf.Cos(Mathf.Deg2Rad * verticalOffset) ) * spawnRadius);
         
     }
 }
