@@ -48,30 +48,57 @@ public class LevelManager : MonoBehaviour
     {
         newLevel = -1;
         transitionTime = 1;
+        steepnessMod = 0;
     }
 
     public void LevelUp()
     {
         newLevel ++;
+        try
+        {
+            WaveObject temp = levels[newLevel];
+        }
+        catch (System.Exception)
+        {
+            newLevel = -1;
+        }
     }
 
     public void LevelDown()
     {
         newLevel --;
+        try
+        {
+            WaveObject temp = levels[newLevel];
+        }
+        catch (System.Exception)
+        {
+            newLevel = -1;
+        }
     }
 
     public void LevelSelect(float _level)
     {
         newLevel = (int)_level;
+        try
+        {
+            WaveObject temp = levels[newLevel];
+        }
+        catch (System.Exception)
+        {
+            newLevel = -1;
+        }
     }
 
     public void SetTransitionTime(float time)
     {
-        transitionTime = time;
+        if (time >= 1)
+            transitionTime = time;
     }
 
     public void SetSteepnessMod(float mod)
     {
-        steepnessMod = mod;
+        if (mod >= 0 && mod <= 1)
+            steepnessMod = mod;
     }
 }
