@@ -7,6 +7,8 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Audio;
 using YawVR;
 using System.Net;
+using UnityEngine.XR;
+using UnityEditor.XR.LegacyInputHelpers;
 public class RevSimUI : MonoBehaviour, YawControllerDelegate
 {
     [Header("Tabs Large")]
@@ -24,8 +26,9 @@ public class RevSimUI : MonoBehaviour, YawControllerDelegate
     [SerializeField] private Volume volume;
     private Vignette vg;
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Slider FOVSlider, vignetteSlider, brightnessSlider, masterSlider;
-    [SerializeField] private InputField FOVField, vignetteField, brightnessField, masterField; 
+    [SerializeField] private CameraOffset VROffset;
+    [SerializeField] private Slider FOVSlider, vignetteSlider, brightnessSlider, heightSlider, masterSlider;
+    [SerializeField] private InputField FOVField, vignetteField, brightnessField, heightField, masterField; 
     private float FOV, vignette, brightness;
     [Header("Level Selection")]
     [SerializeField] private LevelManager levelManager;
@@ -317,6 +320,19 @@ public class RevSimUI : MonoBehaviour, YawControllerDelegate
         UpdateBrightness();
     }
     public void SetBrightness(string value) => SetBrightness(float.Parse(value));
+
+    public void UpdateHeight()
+    {
+        heightField.text =  VROffset.cameraYOffset.ToString("0.00");
+        heightSlider.value = VROffset.cameraYOffset;
+    }
+    public void SetHeight(float value)
+    {
+        VROffset.cameraYOffset = value;
+        UpdateHeight();
+    }
+    public void SetHeight(string value) => SetHeight(float.Parse(value));
+
 #endregion
 
 #region Collectible
