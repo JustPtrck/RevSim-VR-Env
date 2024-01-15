@@ -57,7 +57,7 @@ public class RevSimUI : MonoBehaviour, YawControllerDelegate
         UpdateOffset();
         YawController.Instance().ControllerDelegate = this;
         RefreshLayout(YawController.Instance().State);
-        UpdateOffset();
+        UpdateHeight();
     }
 
     // Update is called once per frame
