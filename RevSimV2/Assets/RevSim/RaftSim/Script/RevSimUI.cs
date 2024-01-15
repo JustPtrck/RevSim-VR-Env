@@ -36,6 +36,9 @@ public class RevSimUI : MonoBehaviour, YawControllerDelegate
     [SerializeField] private CollectableSpawn collectableSpawn;
     [SerializeField] private Slider radiusSlider, horizontalSlider, verticalSlider, offsetSlider;
     [SerializeField] private InputField radiusField, horizontalField, verticalField, offsetField;
+
+    [Header("App Settings")]
+    [SerializeField] private Text closingText;
     
     private void Start()
     {
@@ -407,13 +410,16 @@ public class RevSimUI : MonoBehaviour, YawControllerDelegate
     IEnumerator ShutDown()
     {
         Debug.Log("SHUTDOWN SEQUENCE");
+        closingText.text = "Yaw to Origin...";
         Debug.Log("YAW to Origin");
         SetTransitionTime(5);
         SetLevel(-1);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         Debug.Log("YAW Stopping");
+        closingText.text = "Yaw Stopping...";
         YawControllerStop();
         yield return new WaitForSeconds(1);
+        closingText.text = "Goodbye";
         Debug.Log("Goodbye");
         Application.Quit();
     }
