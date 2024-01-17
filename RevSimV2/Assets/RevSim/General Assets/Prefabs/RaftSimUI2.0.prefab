@@ -593,7 +593,7 @@ RectTransform:
   m_Father: {fileID: 4758439120776574472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -668,7 +668,7 @@ RectTransform:
   m_Father: {fileID: 7890066971087590941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.8, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -876,8 +876,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3433324011524089633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1802,8 +1802,8 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetFOV
         m_Mode: 0
         m_Arguments:
@@ -1817,8 +1817,8 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetFOV
         m_Mode: 0
         m_Arguments:
@@ -2489,7 +2489,7 @@ RectTransform:
   m_Father: {fileID: 4510341048068405431}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3072,7 +3072,7 @@ RectTransform:
   m_Father: {fileID: 3959427730110700741}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3211,7 +3211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3869276810879268799
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3527,8 +3527,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI_Base, Assembly-CSharp
+      - m_Target: {fileID: 4838984192002946289}
+        m_TargetAssemblyTypeName: RevSimUI_Yaw, Assembly-CSharp
         m_MethodName: YawUI_StopDevice
         m_Mode: 1
         m_Arguments:
@@ -3959,8 +3959,8 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetVignette
         m_Mode: 0
         m_Arguments:
@@ -3974,8 +3974,8 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetVignette
         m_Mode: 0
         m_Arguments:
@@ -4878,7 +4878,7 @@ RectTransform:
   m_Father: {fileID: 6937074979037398062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.008333334, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5055,7 +5055,7 @@ RectTransform:
   m_Father: {fileID: 4476873102464689076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5311,7 +5311,7 @@ RectTransform:
   m_Father: {fileID: 6532686549220648346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.0055555557, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6412,7 +6412,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4295398371469945901}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4838984192002946289}
+        m_TargetAssemblyTypeName: RevSimUI_Yaw, Assembly-CSharp
+        m_MethodName: YawUI_StopDevice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2457554071120572450
 GameObject:
   m_ObjectHideFlags: 0
@@ -7389,7 +7401,7 @@ RectTransform:
   m_Father: {fileID: 5287125425684557243}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8242,7 +8254,7 @@ RectTransform:
   m_Father: {fileID: 7857786453910990512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8317,7 +8329,7 @@ RectTransform:
   m_Father: {fileID: 304845237856253887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9153,7 +9165,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7383094181484982611}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4838984192002946289}
+        m_TargetAssemblyTypeName: RevSimUI_Yaw, Assembly-CSharp
+        m_MethodName: YawUI_StartDevice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3634129723391775212
 GameObject:
   m_ObjectHideFlags: 0
@@ -9266,7 +9290,7 @@ RectTransform:
   m_Father: {fileID: 4933103984454623042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9527,8 +9551,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8603094141442497696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10991,6 +11015,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4838984192002946289}
+        m_TargetAssemblyTypeName: RevSimUI_Yaw, Assembly-CSharp
+        m_MethodName: YawUI_StopDevice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4095866231845453630
 GameObject:
   m_ObjectHideFlags: 0
@@ -11664,7 +11700,7 @@ RectTransform:
   m_Father: {fileID: 1289032513603902711}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12543,8 +12579,8 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetHeight
         m_Mode: 0
         m_Arguments:
@@ -12558,8 +12594,8 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetHeight
         m_Mode: 0
         m_Arguments:
@@ -12695,9 +12731,9 @@ RectTransform:
   m_Father: {fileID: 1494460607391031852}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &143948995876110980
 MonoBehaviour:
@@ -13541,8 +13577,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI_Base, Assembly-CSharp
+      - m_Target: {fileID: 4838984192002946289}
+        m_TargetAssemblyTypeName: RevSimUI_Yaw, Assembly-CSharp
         m_MethodName: YawUI_StartDevice
         m_Mode: 1
         m_Arguments:
@@ -13719,7 +13755,7 @@ RectTransform:
   m_Father: {fileID: 1945222367837433371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13999,7 +14035,7 @@ RectTransform:
   m_Father: {fileID: 3439378649886843401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.50277776, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14630,8 +14666,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1960004170224115577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0055555557, y: 0}
-  m_AnchorMax: {x: 0.0055555557, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15147,7 +15183,7 @@ RectTransform:
   m_Father: {fileID: 3058523279558484342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15413,8 +15449,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetVignette
         m_Mode: 0
         m_Arguments:
@@ -15671,7 +15707,7 @@ RectTransform:
   m_Father: {fileID: 5661887682800151473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15803,8 +15839,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetFOV
         m_Mode: 0
         m_Arguments:
@@ -16604,8 +16640,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetBrightness
         m_Mode: 0
         m_Arguments:
@@ -17126,7 +17162,7 @@ RectTransform:
   m_Father: {fileID: 8282776145798369020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -17568,8 +17604,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2646527697760166699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.8, y: 0}
-  m_AnchorMax: {x: 0.8, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -18586,7 +18622,7 @@ RectTransform:
   m_Father: {fileID: 8430614591965590834}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -18974,8 +19010,8 @@ MonoBehaviour:
   tab1: {fileID: 4050232328609231033}
   tab2: {fileID: 1828497593570308950}
   tab3: {fileID: 277411396915140583}
-  yawControllerUI: {fileID: 0}
-  audioMixer: {fileID: 0}
+  yawControllerUI: {fileID: 4838984192002946289}
+  audioMixer: {fileID: 24100000, guid: d10546da625f55a4590b4308df10d23b, type: 2}
   UIAlphaSlider: {fileID: 8876820394811283165}
   masterSlider: {fileID: 6239481617369954192}
   UIAlphaField: {fileID: 8793922265269785549}
@@ -19386,7 +19422,7 @@ RectTransform:
   m_Father: {fileID: 5850666604604429947}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -19497,7 +19533,7 @@ RectTransform:
   m_Father: {fileID: 1948939787387733759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -19995,7 +20031,7 @@ RectTransform:
   m_Father: {fileID: 1257614040164614883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -20484,8 +20520,8 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetBrightness
         m_Mode: 0
         m_Arguments:
@@ -20499,8 +20535,8 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetBrightness
         m_Mode: 0
         m_Arguments:
@@ -21416,8 +21452,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 890421672429460502}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.50277776, y: 0}
-  m_AnchorMax: {x: 0.50277776, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22110,8 +22146,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2926691429693823971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.008333334, y: 0}
-  m_AnchorMax: {x: 0.008333334, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22349,8 +22385,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI_Base, Assembly-CSharp
+      - m_Target: {fileID: 4838984192002946289}
+        m_TargetAssemblyTypeName: RevSimUI_Yaw, Assembly-CSharp
         m_MethodName: YawUI_ConnectDevice
         m_Mode: 1
         m_Arguments:
@@ -22454,7 +22490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &445179313789131641
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22603,7 +22639,7 @@ RectTransform:
   m_Father: {fileID: 9209263141180003291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -23333,8 +23369,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6701306065764082861}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
+      - m_Target: {fileID: 3542581722605501641}
+        m_TargetAssemblyTypeName: RevSimUI_Operator, Assembly-CSharp
         m_MethodName: SetHeight
         m_Mode: 0
         m_Arguments:
@@ -23414,7 +23450,7 @@ RectTransform:
   m_Father: {fileID: 535716448850119020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
